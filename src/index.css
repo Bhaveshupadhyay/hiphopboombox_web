@@ -1,0 +1,56 @@
+@import "tailwindcss";
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+#root {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  height: 100%;
+}
+
+button svg {
+  margin-left: 10px;
+}
+
+tbody tr td svg {
+  margin-right: 10px;
+}
+
+@theme {
+  --breakpoint-xs: 20rem;
+  --breakpoint-xd: 23rem;
+  --breakpoint-xm: 26rem;
+}
+
+/* Hide scrollbar thumb (optional) */
+::-webkit-scrollbar-thumb {
+  background: gray;
+}
+
+::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+video::-webkit-media-controls {
+  display: none !important;
+}
+
+video::-webkit-media-controls-enclosure {
+  display: none !important;
+}
+
+video::-webkit-media-controls-panel {
+  display: none !important;
+}
+
