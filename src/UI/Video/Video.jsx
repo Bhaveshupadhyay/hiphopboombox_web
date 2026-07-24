@@ -31,7 +31,7 @@ import {
 } from 'react-icons/fa';
 import { FaThreads } from "react-icons/fa6";
 
-const IMG_BASE_URL = import.meta.env.VITE_IMG_URL;
+
 
 const Video = () => {
   	const { id } = useParams();
@@ -99,7 +99,7 @@ const Video = () => {
 
 	useEffect(() => {
 		const isValidId = typeof id === "string" && /^[^<>]*$/.test(id);
-		const isValidTitle = typeof title === "string" && /^[^<>]*$/.test(title);
+		const isValidTitle = !title || (typeof title === "string" && /^[^<>]*$/.test(title));
 
 		// console.log("ID valid:", isValidId);
 		// console.log("Title valid:", isValidTitle);
@@ -400,19 +400,34 @@ const Video = () => {
 								<div className="w-full bg-transparent">
 								  {homeData.posts &&
 								    homeData.posts.map(i => (
-								    	<>
-									      <div key={i.id} className={`relative w-full border-0 h-0 cursor-pointer ${i.link.includes("youtube") ? 'pb-[90%]' : 'pb-[56.25%]'}`}> {/* 16:9 Aspect Ratio */}
+								      <Fragment key={i.id}>
+									      <div className={`relative w-full border-0 h-0 cursor-pointer ${i.link && i.link.includes("youtube") ? 'pb-[90%]' : 'pb-[56.25%]'}`}> {/* 16:9 Aspect Ratio */}
 									    	{i.link && i.link.includes("youtube") ? (
-											    // Extract video ID from the YouTube URL
+											    // Extract video ID from the YouTube URL safely
 											    (() => {
-											      const url = new URL(i.link);
-											      const videoId = url.searchParams.get("v"); // Extract video ID from "v" parameter
+											      let videoId = null;
+											      try {
+											        const url = new URL(i.link);
+											        if (url.hostname.includes("youtu.be")) {
+											          videoId = url.pathname.slice(1);
+											        } else if (url.pathname.includes("/embed/")) {
+											          videoId = url.pathname.split("/embed/")[1]?.split("?")[0];
+											        } else if (url.pathname.includes("/shorts/")) {
+											          videoId = url.pathname.split("/shorts/")[1]?.split("?")[0];
+											        } else {
+											          videoId = url.searchParams.get("v");
+											        }
+											      } catch (e) {
+											        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|shorts\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+											        const match = i.link.match(regExp);
+											        videoId = (match && match[2].length === 11) ? match[2] : null;
+											      }
 											      return (
 											        <iframe
 											          id="yt-player"
 											          width="100%"
-										              height="100%"
-										              className="absolute top-0 left-0"
+											          height="100%"
+											          className="absolute top-0 left-0"
 											          src={`https://www.youtube.com/embed/${videoId}?version=3&autoplay=0&mute=1&loop=0&controls=1`}
 											          title="YouTube video player"
 											          frameBorder="0"
@@ -423,8 +438,8 @@ const Video = () => {
 											    })()
 											) : (
 												<CustomVideoPlayer 
-													videoUrl={`${IMG_BASE_URL}/${i.video}`} 
-													thumbnailUr={`${IMG_BASE_URL}/${i.image}`}
+													videoUrl={i.video} 
+													thumbnailUrl={i.image}
 												/>
 											)}
 									      </div>
@@ -547,9 +562,9 @@ const Video = () => {
 														    </Linkify>
 														  </div>
 														)}
-										      </div>
+										  </div>
 									      </div>
-									    </>
+									    </Fragment>
 								    ))}
 								</div>
 							)}
@@ -585,7 +600,7 @@ const Video = () => {
 								            className="w-full h-full sm:w-full sm:h-full object-cover"
 								            src={
 								              i?.portrait_image
-								                ? `${IMG_BASE_URL}/${i?.image}`
+								                ? i?.image
 								                : "https://images.pexels.com/photos/30892416/pexels-photo-30892416.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
 								            }
 								            alt="Image"

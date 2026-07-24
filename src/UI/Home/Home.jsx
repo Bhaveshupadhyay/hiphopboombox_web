@@ -12,7 +12,7 @@ import axios from '../../api/axios';
 
 import { Link, useNavigate } from "react-router-dom";
 
-const IMG_BASE_URL = import.meta.env.VITE_IMG_URL;
+
 
 const Home = () => {
 	const { translations, currentLang } = useSelector((state) => state.lang);
@@ -399,13 +399,13 @@ const Home = () => {
 										{homeData.featured && homeData.featured.map(i => (
 											<Link to={`/video/${i.id}?title=${i.title.slice(0, 5)}`} key={i.id} className="h-75 sm:h-80 relative dark:shadow-md rounded-lg dark:shadow-white">
 										    	<img
-												    src={i?.portrait_image ? `${IMG_BASE_URL}/${i?.portrait_image}` : "https://images.pexels.com/photos/30892416/pexels-photo-30892416.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}
+												    src={i?.portrait_image ? i?.portrait_image : "https://images.pexels.com/photos/30892416/pexels-photo-30892416.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}
 												    alt="Portrait"
 												    className="block md:hidden w-full h-full object-fill rounded"
 													/>
 
 													<img
-													  src={i?.image ? `${IMG_BASE_URL}/${i?.image}` : "https://images.pexels.com/photos/30892416/pexels-photo-30892416.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}
+													  src={i?.image ? i?.image : "https://images.pexels.com/photos/30892416/pexels-photo-30892416.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}
 													  alt="Landscape"
 													  className="hidden md:block w-full h-full object-fill rounded"
 													/>

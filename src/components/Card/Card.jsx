@@ -4,7 +4,7 @@ import { IoEyeSharp } from "react-icons/io5";
 
 import { SocialMedia } from "../index";
 
-const IMG_BASE_URL = import.meta.env.VITE_IMG_URL;
+
 
 const Card = ({ lang, isPosts, path, rounded, isMusic, isHome, isDataLoaded, isImageLoaded, imgUpload, className = '', trending, ...rest}) => {
 	// console.log(isDataLoaded, isImageLoaded);
@@ -53,7 +53,7 @@ const Card = ({ lang, isPosts, path, rounded, isMusic, isHome, isDataLoaded, isI
 				)}
 				<img
 					className={`w-full h-full object-cover overflow-hidden lg:w-full ${rounded ? 'rounded-full' : ''} ${isImageLoaded ? '' : 'hidden'}`}
-					src={rest.data?.portrait_image ? `${IMG_BASE_URL}/${rest.data?.portrait_image}` : "https://images.pexels.com/photos/30892416/pexels-photo-30892416.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}
+					src={rest.data?.portrait_image ? rest.data?.portrait_image : "https://images.pexels.com/photos/30892416/pexels-photo-30892416.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}
 					alt="hiphopboombox"
 					onLoad={imgUpload}
 					style={{ width: '100%', height: '100%', objectFit: 'fill' }}

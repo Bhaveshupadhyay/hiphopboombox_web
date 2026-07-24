@@ -14,7 +14,7 @@ import { useParams, useNavigate, useLocation } from 'react-router-dom';
 
 import debounce from 'lodash.debounce';
 
-const IMG_BASE_URL = import.meta.env.VITE_IMG_URL;
+
 
 const Posts = () => {
 	const { translations, currentLang } = useSelector((state) => state.lang);
