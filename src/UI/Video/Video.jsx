@@ -286,7 +286,9 @@ const Video = () => {
 	        signal: controller.signal
 	      });
 	      
-	      const newPosts = res.data?.data || [];
+	      const resData = res.data;
+	      const newPosts = Array.isArray(resData) ? resData : (resData?.data || []);
+	      const totalCount = typeof resData?.totalCount === 'number' ? resData.totalCount : newPosts.length;
 
 	      // console.log(newPosts);
 	      
@@ -296,7 +298,7 @@ const Video = () => {
 	          		...prev,
 	          		categoryPosts: {
 		            	data: page === 1 ? newPosts : [...(prev.categoryPosts?.data || []), ...newPosts],
-		            	count: res.data?.totalCount
+		            	count: totalCount
 		          	}
 		        }
 	        });
