@@ -12,6 +12,14 @@ import axios from '../../api/axios';
 
 import { Link, useNavigate } from "react-router-dom";
 
+const getArrayFromData = (statusObj) => {
+  if (!statusObj || statusObj.status !== "fulfilled") return [];
+  const val = statusObj.value?.data;
+  if (Array.isArray(val)) return val;
+  if (val && Array.isArray(val.data)) return val.data;
+  return [];
+};
+
 
 
 const Home = () => {
@@ -92,12 +100,12 @@ const Home = () => {
 		        setHomeData((prevState) => {
 		        	return {
 		        		...prevState,
-						categories: isMounted &&  categoryData.status === "fulfilled" ? categoryData.value.data?.data || [] : [],
-						featured: isMounted &&  featuredData.status === "fulfilled" ? featuredData.value.data?.data || [] : [],
-						polls: isMounted &&  pollsData.status === "fulfilled" ? pollsData.value.data?.data || [] : [],
-						popdown: isMounted &&  popdownData.status === "fulfilled" ? popdownData.value.data?.data || [] : [],
-						desktopAds: isMounted &&  desktopAdsData.status === "fulfilled" ? desktopAdsData.value.data?.data || [] : [],
-						mobileAds: isMounted &&  mobileAdsData.status === "fulfilled" ? mobileAdsData.value.data?.data || [] : []
+						categories: isMounted ? getArrayFromData(categoryData) : [],
+						featured: isMounted ? getArrayFromData(featuredData) : [],
+						polls: isMounted ? getArrayFromData(pollsData) : [],
+						popdown: isMounted ? getArrayFromData(popdownData) : [],
+						desktopAds: isMounted ? getArrayFromData(desktopAdsData) : [],
+						mobileAds: isMounted ? getArrayFromData(mobileAdsData) : []
 					}
 				});
 
@@ -143,15 +151,21 @@ const Home = () => {
           signal: controller.signal,
         });
 
-        const data = response.data;
-        if (isMounted && data?.isSuccess && data.data.length > 0) {
+        const resData = response.data;
+        let trendingList = [];
+        if (Array.isArray(resData)) {
+          trendingList = resData;
+        } else if (resData && Array.isArray(resData.data)) {
+          trendingList = resData.data;
+        }
+
+        if (isMounted && trendingList.length > 0) {
           setHomeData((prev) => {
             const newState = { ...prev };
-            // Store the data for the appropriate term
-            if (term === 'now') newState.trendingNow = data.data || [];
-            else if (term === 'week') newState.trendingWeek = data.data || [];
-            else if (term === 'month') newState.trendingMonth = data.data || [];
-            else if (term === 'year') newState.trendingYear = data.data || [];
+            if (term === 'now') newState.trendingNow = trendingList;
+            else if (term === 'week') newState.trendingWeek = trendingList;
+            else if (term === 'month') newState.trendingMonth = trendingList;
+            else if (term === 'year') newState.trendingYear = trendingList;
             return newState;
           });
         }

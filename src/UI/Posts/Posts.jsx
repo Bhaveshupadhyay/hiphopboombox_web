@@ -14,6 +14,27 @@ import { useParams, useNavigate, useLocation } from 'react-router-dom';
 
 import debounce from 'lodash.debounce';
 
+const getArrayFromData = (statusObj) => {
+  if (!statusObj || statusObj.status !== "fulfilled") return [];
+  const val = statusObj.value?.data;
+  if (Array.isArray(val)) return val;
+  if (val && Array.isArray(val.data)) return val.data;
+  return [];
+};
+
+const parsePostsResponse = (res) => {
+  const resData = res?.data;
+  if (Array.isArray(resData)) {
+    return { data: resData, count: resData.length };
+  }
+  if (resData && typeof resData === 'object') {
+    const list = Array.isArray(resData.data) ? resData.data : [];
+    const count = typeof resData.totalCount === 'number' ? resData.totalCount : list.length;
+    return { data: list, count };
+  }
+  return { data: [], count: 0 };
+};
+
 
 
 const Posts = () => {
@@ -215,9 +236,9 @@ const Posts = () => {
 		        setHomeData((prevState) => {
 		        	return {
 		        		...prevState,
-						categories: isMounted &&  categoryData.status === "fulfilled" ? categoryData.value.data?.data || [] : [],
-						desktopAds: isMounted &&  desktopAdsData.status === "fulfilled" ? desktopAdsData.value.data?.data || [] : [],
-						mobileAds: isMounted &&  mobileAdsData.status === "fulfilled" ? mobileAdsData.value.data?.data || [] : []
+						categories: isMounted ? getArrayFromData(categoryData) : [],
+						desktopAds: isMounted ? getArrayFromData(desktopAdsData) : [],
+						mobileAds: isMounted ? getArrayFromData(mobileAdsData) : []
 					}
 				});
 
@@ -259,23 +280,22 @@ const Posts = () => {
 					{ signal: controller.signal }
 				);
 
-				if (isMounted && postsData.data?.isSuccess) {
+				const parsed = parsePostsResponse(postsData);
+				if (isMounted) {
 					setHomeData(p => ({
 						...p,
 						posts: {
-							data: postsData.data?.data,
-							count: postsData.data?.totalCount,
+							data: parsed.data,
+							count: parsed.count,
 						},
 					}));
 
 					setDataLoading(p => ({
 						...p,
-						postsLoading: postsData.data?.isSuccess || false,
+						postsLoading: true,
 					}));
 
 					setIsLoading(true);
-				} else {
-					throw new Error("failed...");
 				}
 			} catch (error) {
 				console.error("Error fetching category posts data: ", error.message);
@@ -292,23 +312,22 @@ const Posts = () => {
 
 				// console.log(postsData.data);
 
-				if (isMounted && postsData.data?.isSuccess) {
+				const parsed = parsePostsResponse(postsData);
+				if (isMounted) {
 					setHomeData(p => ({
 						...p,
 						posts: {
-							data: postsData.data?.data,
-							count: postsData.data?.totalCount,
+							data: parsed.data,
+							count: parsed.count,
 						},
 					}));
 
 					setDataLoading(p => ({
 						...p,
-						postsLoading: postsData.data?.isSuccess || false,
+						postsLoading: true,
 					}));
 
 					setIsLoading(true);
-				} else {
-					throw new Error("failed...");
 				}
 			} catch (error) {
 				console.error("Error fetching category posts data: ", error.message);

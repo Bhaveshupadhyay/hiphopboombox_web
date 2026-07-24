@@ -31,6 +31,14 @@ import {
 } from 'react-icons/fa';
 import { FaThreads } from "react-icons/fa6";
 
+const getArrayFromData = (statusObj) => {
+  if (!statusObj || statusObj.status !== "fulfilled") return [];
+  const val = statusObj.value?.data;
+  if (Array.isArray(val)) return val;
+  if (val && Array.isArray(val.data)) return val.data;
+  return [];
+};
+
 
 
 const Video = () => {
@@ -118,15 +126,21 @@ const Video = () => {
 	          signal: controller.signal,
 	        });
 
-	        const data = response.data;
-	        if (isMounted && data?.isSuccess && data.data.length > 0) {
+	        const resData = response.data;
+	        let trendingList = [];
+	        if (Array.isArray(resData)) {
+	          trendingList = resData;
+	        } else if (resData && Array.isArray(resData.data)) {
+	          trendingList = resData.data;
+	        }
+
+	        if (isMounted && trendingList.length > 0) {
 	          setHomeData((prev) => {
 	            const newState = { ...prev };
-	            // Store the data for the appropriate term
-	            if (term === 'now') newState.trendingNow = data.data || [];
-	            else if (term === 'week') newState.trendingWeek = data.data || [];
-	            else if (term === 'month') newState.trendingMonth = data.data || [];
-	            else if (term === 'year') newState.trendingYear = data.data || [];
+	            if (term === 'now') newState.trendingNow = trendingList;
+	            else if (term === 'week') newState.trendingWeek = trendingList;
+	            else if (term === 'month') newState.trendingMonth = trendingList;
+	            else if (term === 'year') newState.trendingYear = trendingList;
 	            return newState;
 	          });
 	        }
@@ -214,11 +228,11 @@ const Video = () => {
 	      if (isMounted) {
 	        setHomeData((prevState) => ({
 	          ...prevState,
-	          categories: categoryData.status === "fulfilled" ? categoryData.value.data?.data || [] : [],
+	          categories: getArrayFromData(categoryData),
 	          posts: postsArray,
-	          popdown: popdownData.status === "fulfilled" ? popdownData.value.data?.data || [] : [],
-	          desktopAds: desktopAdsData.status === "fulfilled" ? desktopAdsData.value.data?.data || [] : [],
-	          mobileAds: mobileAdsData.status === "fulfilled" ? mobileAdsData.value.data?.data || [] : []
+	          popdown: getArrayFromData(popdownData),
+	          desktopAds: getArrayFromData(desktopAdsData),
+	          mobileAds: getArrayFromData(mobileAdsData)
 	        }));
 
 	        setDataLoading((prevState) => ({
