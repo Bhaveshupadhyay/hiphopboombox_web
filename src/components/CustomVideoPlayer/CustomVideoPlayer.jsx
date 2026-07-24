@@ -115,7 +115,7 @@ const CustomVideoPlayer = ({ id, videoUrl, thumbnailUrl }) => {
         <ReactPlayer
           url={videoUrl}
           controls={false}
-          light={thumbnailUrl}
+          light={!hasStarted ? thumbnailUrl : false}
           playing={isPlaying}
           volume={volume}
           width="100%"

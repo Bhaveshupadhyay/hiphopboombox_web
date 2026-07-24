@@ -182,7 +182,23 @@ const Video = () => {
 	        axios.get("/api/v1/user_web/mobileAds/1", { signal })
 	      ]);
 
-	      const post = postsData?.value?.data?.data?.[0];
+	      let post = null;
+	      let postsArray = [];
+	      if (postsData.status === "fulfilled") {
+	        const resData = postsData.value.data;
+	        if (resData) {
+	          if (Array.isArray(resData.data)) {
+	            post = resData.data[0];
+	            postsArray = resData.data;
+	          } else if (resData.data && typeof resData.data === 'object') {
+	            post = resData.data;
+	            postsArray = [resData.data];
+	          } else if (resData.id) {
+	            post = resData;
+	            postsArray = [resData];
+	          }
+	        }
+	      }
 	      const updatedViews = post?.views ? post.views + 1 : 1;
 
 	      if (isMounted && post) {
@@ -199,7 +215,7 @@ const Video = () => {
 	        setHomeData((prevState) => ({
 	          ...prevState,
 	          categories: categoryData.status === "fulfilled" ? categoryData.value.data?.data || [] : [],
-	          posts: postsData.status === "fulfilled" ? postsData.value.data?.data || [] : [],
+	          posts: postsArray,
 	          popdown: popdownData.status === "fulfilled" ? popdownData.value.data?.data || [] : [],
 	          desktopAds: desktopAdsData.status === "fulfilled" ? desktopAdsData.value.data?.data || [] : [],
 	          mobileAds: mobileAdsData.status === "fulfilled" ? mobileAdsData.value.data?.data || [] : []
