@@ -1,0 +1,47 @@
+{
+  "smws": {
+    "category": "catégorie",
+    "subCategory": "sous-chat",
+    "lang": "sp"
+  },
+  "login_h1": "Bienvenidos al boombox del hip hop",
+  "login_h2": "No tienes una cuenta?",
+  "login_h3": "INSCRIBIRSE",
+  "login_h4": "Olvidar contraseña",
+  "login_h5": "Acceso",
+  "login_h6": "Correo electrónico",
+  "login_h7": "Contraseña",
+  "verify_h1": "OTP",
+  "verify_h2": "Restablecer contraseña",
+  "reset_h1": "Olvidar Contraseña",
+  "reset_h2": "confirmar Contraseña",
+
+  "register_h1": "Ya tengo una cuenta",
+  "register_h2": "INICIAR SESIÓN",
+  "register_h3": "INSCRIBIRSE",
+  "register_h4": "correo electrónico",
+  "register_h5": "contraseña",
+  "register_h6": "nombre",
+  "register_h7": "confirmar Contraseña",
+
+  "nav_h1": "ANUNCIAR",
+  "nav_h2": "CONTACTO",
+  "nav_h3": "MÚSICA",
+  "nav_h4": "NOTICIAS",
+  "nav_h5": "Buscar",
+  "nav_h6": "Iniciar sesión / Registrarse",
+  "nav_h7": "Votación / Encuestas",
+  "nav_h8": "Cerrar sesión",
+
+  "home_h1": "Ahora",
+  "home_h2": "Esta semana",
+  "home_h3": "Este mes",
+  "home_h4": "Este año",
+
+  "footer_h1": "UE DSA",
+  "footer_h2": "privacidad",
+  "footer_h3": "términos",
+  "footer_h4": "DMCA",
+  "footer_h5": "EULA",
+  "footer_h6": "Términos y condiciones del sorteo"
+}

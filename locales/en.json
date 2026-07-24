@@ -1,0 +1,47 @@
+{
+  "smws": {
+    "category": "catégorie",
+    "subCategory": "sous-chat",
+    "lang": "en"
+  },
+  "login_h1": "Welcome to hip hop boom box",
+  "login_h2": "Don't have an account?",
+  "login_h3": "SIGN UP",
+  "login_h4": "Forget password",
+  "login_h5": "Log In",
+  "login_h6": "Email",
+  "login_h7": "Password",
+  "verify_h1": "Otp",
+  "verify_h2": "Reset Password",
+  "reset_h1": "Forget Password",
+  "reset_h2": "Confirm Password",
+
+  "register_h1": "Already have an account?",
+  "register_h2": "SIGN IN",
+  "register_h3": "SIGN UP",
+  "register_h4": "email",
+  "register_h5": "password",
+  "register_h6": "name",
+  "register_h7": "confirm password",
+
+  "nav_h1": "ADVERTISE",
+  "nav_h2": "CONTACT",
+  "nav_h3": "MUSIC",
+  "nav_h4": "NEWS",
+  "nav_h5": "Search",
+  "nav_h6": "Login / Register",
+  "nav_h7": "Voting / Polls",
+  "nav_h8": "Logout",
+
+  "home_h1": "Now",
+  "home_h2": "This Week",
+  "home_h3": "This Month",
+  "home_h4": "This Year",
+
+  "footer_h1": "eu dsa",
+  "footer_h2": "privacy",
+  "footer_h3": "terms",
+  "footer_h4": "dmca",
+  "footer_h5": "eula",
+  "footer_h6": "Raffle T&C"
+}
