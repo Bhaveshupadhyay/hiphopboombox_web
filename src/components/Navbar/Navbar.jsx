@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { FaBars, FaTimes, FaPoll, FaUserCircle, FaSearch, FaTwitter, FaFacebook, FaYoutube, FaInstagram, FaTiktok } from 'react-icons/fa';
+import { FaBars, FaTimes, FaPoll, FaUserCircle, FaSearch, FaTwitter, FaFacebook, FaYoutube, FaInstagram, FaTiktok, FaShieldAlt } from 'react-icons/fa';
 import { FaThreads } from "react-icons/fa6";
 import { CgToggleOff, CgToggleOn } from "react-icons/cg";
 
@@ -68,6 +68,11 @@ const Navbar = ({ currentUser }) => {
 		        	<CircleCard>
 		        		<Link to="/posts?type=search">
 		        			<FaSearch className="text-black dark:text-white transition-colors hover:text-blue-400" fontSize={23} cursor="pointer" />
+		        		</Link>
+		        	</CircleCard>
+		        	<CircleCard>
+		        		<Link to="/admin" title="Admin Panel">
+		        			<FaShieldAlt className="text-black dark:text-white transition-colors hover:text-blue-400" fontSize={21} cursor="pointer" />
 		        		</Link>
 		        	</CircleCard>
 		      	</ul>
@@ -151,6 +156,9 @@ const Navbar = ({ currentUser }) => {
 				        	</CircleCard>
 				        	<CircleCard className="font-medium tracking-wider">
 				        		<a href="#">{translations.nav_h7}</a>
+				        	</CircleCard>
+				        	<CircleCard className="font-medium tracking-wider">
+				        		<Link to="/admin" className="text-blue-500 font-bold">Admin Panel</Link>
 				        	</CircleCard>
 			            </ul>
 

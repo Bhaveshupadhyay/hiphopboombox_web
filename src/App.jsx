@@ -16,7 +16,8 @@ import {
   Audio,
   Home,
   Video,
-  Posts 
+  Posts,
+  Admin 
 } from './UI';
 
 import { Routes, Route } from "react-router-dom";
@@ -38,6 +39,8 @@ const App = () => {
         <Route path="/posts" element={<Posts />} />
         <Route path="/audio/:id" element={<Audio />} />
         <Route path="/video/:id" element={<Video />} />
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/admin/posts" element={<Admin />} />
       </Routes>
     </>
   )
