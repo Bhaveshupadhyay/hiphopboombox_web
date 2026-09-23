@@ -1,7 +1,5 @@
 import { Link } from 'react-router-dom';
 
-import { useState } from 'react';
-
 import { useSelector } from 'react-redux';
 
 import hiphop from '../../assets/hiphopimg1.png';
@@ -40,6 +38,11 @@ const Footer = () => {
 				        <a href="#" rel="noopener noreferrer">
 				        	{translations.footer_h6}
 				        </a>
+				    </li>
+				    <li className="text-black dark:text-white text-nowrap hover:text-blue-500 uppercase cursor-pointer text-sm xm:text-base md:text-lg">
+				        <Link to="/admin">
+				        	Admin Panel
+				        </Link>
 				    </li>
 			    </ul>
 			</nav>

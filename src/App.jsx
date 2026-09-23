@@ -1,5 +1,3 @@
-import { Fragment } from 'react'
-
 import { ScrollToTop } from './components';
 
 import {  
@@ -16,7 +14,8 @@ import {
   Audio,
   Home,
   Video,
-  Posts 
+  Posts,
+  Admin
 } from './UI';
 
 import { Routes, Route } from "react-router-dom";
@@ -24,9 +23,6 @@ import { Routes, Route } from "react-router-dom";
 
 const App = () => {
   return (
-    // <div className="h-full bg-gray-50 dark:bg-black dark:h-full text-black dark:text-white transition-colors">
-    //   <Register />
-    // </div>
     <>
       <ScrollToTop />
       <Routes>
@@ -38,6 +34,7 @@ const App = () => {
         <Route path="/posts" element={<Posts />} />
         <Route path="/audio/:id" element={<Audio />} />
         <Route path="/video/:id" element={<Video />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     </>
   )
