@@ -2,7 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/bhaveshupadhyay/github_automation/main/qa-contract.schema.json",
   "serviceType": "frontend",
   "port": 5173,
-  "healthCheckUrl": "http://127.0.0.1:5173/",
+  "healthCheckUrl": "/",
   "apiBaseUrlEnvVar": "VITE_BASE_URL",
   "lifecycle": {
     "prepare": "npm ci",
