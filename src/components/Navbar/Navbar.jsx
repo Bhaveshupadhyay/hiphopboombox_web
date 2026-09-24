@@ -53,6 +53,9 @@ const Navbar = ({ currentUser }) => {
 		        		<Link to="/music">{translations.nav_h3}</Link>
 		        	</CircleCard>
 		        	<CircleCard className="font-bold text-black dark:text-white tracking-wider">
+		        		<Link to="/admin">ADMIN</Link>
+		        	</CircleCard>
+		        	<CircleCard className="font-bold text-black dark:text-white tracking-wider">
 		        		<a href="#">{translations.nav_h4}</a>
 		        	</CircleCard>
 		        	<CircleCard>
@@ -145,6 +148,9 @@ const Navbar = ({ currentUser }) => {
 				        	</CircleCard>
 				        	<CircleCard className="font-medium tracking-wider">
 				        		<Link to="/music">{translations.nav_h3}</Link>
+				        	</CircleCard>
+				        	<CircleCard className="font-medium tracking-wider">
+				        		<Link to="/admin">ADMIN</Link>
 				        	</CircleCard>
 				        	<CircleCard className="font-medium tracking-wider">
 				        		<a href="#">{translations.nav_h4}</a>
