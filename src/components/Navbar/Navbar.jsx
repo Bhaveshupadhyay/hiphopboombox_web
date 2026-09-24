@@ -55,6 +55,9 @@ const Navbar = ({ currentUser }) => {
 		        	<CircleCard className="font-bold text-black dark:text-white tracking-wider">
 		        		<a href="#">{translations.nav_h4}</a>
 		        	</CircleCard>
+		        	<CircleCard className="font-bold text-black dark:text-white tracking-wider">
+		        		<Link to="/admin">Admin</Link>
+		        	</CircleCard>
 		        	<CircleCard>
 		        		<a href="#">
 		        			<FaPoll className="text-black dark:text-white transition-colors hover:text-blue-400" fontSize={23} cursor="pointer" />
@@ -151,6 +154,9 @@ const Navbar = ({ currentUser }) => {
 				        	</CircleCard>
 				        	<CircleCard className="font-medium tracking-wider">
 				        		<a href="#">{translations.nav_h7}</a>
+				        	</CircleCard>
+				        	<CircleCard className="font-medium tracking-wider">
+				        		<Link to="/admin">Admin Panel</Link>
 				        	</CircleCard>
 			            </ul>
 

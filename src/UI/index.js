@@ -13,6 +13,7 @@ import Home from './Home/Home';
 import Category from './Category/Category';
 import Video from './Video/Video';
 import Posts from './Posts/Posts';
+import Admin from './Admin/Admin';
 
 export {
 	Advertise,
@@ -29,5 +30,6 @@ export {
 	Home,
 	Category,
 	Video,
-	Posts
+	Posts,
+	Admin
 }
